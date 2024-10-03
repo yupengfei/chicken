@@ -28,6 +28,21 @@
 <script setup lang="ts">
 import { read, utils } from 'xlsx';
 import { ref } from 'vue';
+import * as echarts from 'echarts';
+type EChartsOption = echarts.EChartsOption;
+
+type Point = {
+  记录时间: Date,
+  温度1: number,
+  温度2: number,
+  温度3: number,
+  温度4: number,
+  室内平均温度: number,
+  分区均温1: number,
+  分区均温2: number,
+  室外温度: number,
+  室外湿度: number,
+}
 
 const info = ref('')
 
@@ -44,9 +59,13 @@ const onFileChanged = async (event: Event) => {
     console.log(workbook.SheetNames[0])
     let first_ws = workbook.Sheets[workbook.SheetNames[0]];
 
-    let data = utils.sheet_to_json(first_ws)
+    let data = utils.sheet_to_json<Point>(first_ws)
     console.log(data)
     info.value = "加载完成" + file.name
   }
 }
+
+// const drawData(data) {
+
+// }
 </script>
