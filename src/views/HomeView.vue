@@ -6,14 +6,14 @@
 
 #upload {
   position: fixed;
-  width: 360px;
+  width: 660px;
   height: 60px;
-  font-size: 20px;
+  /* font-size: 20px; */
   top: 0%;
   left: 50%;
   margin-top: 0px;
   /* Negative half of height. */
-  margin-left: -180px;
+  margin-left: -330px;
   /* Negative half of width. */
 }
 </style>
@@ -21,9 +21,7 @@
   <!-- <input type="file" @change="onFileChanged($event)"
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref="file" /> -->
   <div id="upload">
-    <input type="file" @change="onFileChanged($event)" accept="application/vnd.ms-excel" />
-    <br>
-    <label>{{ info }}</label>
+    <input type="file" @change="onFileChanged($event)" accept="application/vnd.ms-excel" /> <label>{{ info }}</label>
   </div>
 
   <div id="chart"></div>
@@ -96,9 +94,15 @@ const drawData = (data: Point[]) => {
       boundaryGap: false,
       data: data.map(d => d.记录时间)
     },
-    yAxis: {
-      type: 'value'
+    yAxis: [{
+      type: 'value',
+      position: 'left',
     },
+    {
+      type: 'value',
+      position: 'right',
+    }
+    ],
     tooltip: {
       trigger: 'axis',
       // axisPointer: {
@@ -144,57 +148,68 @@ const drawData = (data: Point[]) => {
       {
         name: "室内平均温度",
         type: 'line',
-        data: data.map(d => d.室内平均温度)
+        data: data.map(d => d.室内平均温度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "室外温度",
         type: 'line',
-        data: data.map(d => d.室外温度)
+        data: data.map(d => d.室外温度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "室内湿度",
         type: 'line',
-        data: data.map(d => d.室内湿度)
+        data: data.map(d => d.室内湿度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "室外湿度",
         type: 'line',
-        data: data.map(d => d.室外湿度)
+        data: data.map(d => d.室外湿度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "目标温度",
         type: 'line',
-        data: data.map(d => d.目标温度)
+        data: data.map(d => d.目标温度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "静压",
         type: 'line',
-        data: data.map(d => d.静压)
+        data: data.map(d => d.静压),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "小窗1开度",
         type: 'line',
-        data: data.map(d => d.小窗1开度)
+        data: data.map(d => d.小窗1开度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "进风口1开度",
         type: 'line',
-        data: data.map(d => d.进风口1开度)
+        data: data.map(d => d.进风口1开度),
+        yAxisIndex: 0 // 使用第一个Y轴
       },
       {
         name: "通风开时长",
         type: 'line',
-        data: data.map(d => d.通风开时长)
+        data: data.map(d => d.通风开时长),
+        yAxisIndex: 1 // 使用第一个Y轴
       },
       {
         name: "通风关时长",
         type: 'line',
-        data: data.map(d => d.通风关时长)
+        data: data.map(d => d.通风关时长),
+        yAxisIndex: 1 // 使用第一个Y轴
       },
       {
         name: "耗水量",
         type: 'line',
-        data: data.map(d => d.耗水量)
+        data: data.map(d => d.耗水量),
+        yAxisIndex: 1 // 使用第一个Y轴
       },
     ]
   };
