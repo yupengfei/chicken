@@ -35,18 +35,21 @@ import { read, utils } from 'xlsx';
 import { ref, onMounted } from 'vue';
 import * as echarts from 'echarts';
 // type EChartsOption = echarts.EChartsOption;
-
+// 天数 室内平均温度 室外温度 室内湿度 室外湿度 目标温度 静压 小窗1开度 进风口1开度 通风开时长 通风关时长 耗水量
 type Point = {
   记录时间: string,
-  温度1: number,
-  温度2: number,
-  温度3: number,
-  温度4: number,
+
   室内平均温度: number,
-  分区均温1: number,
-  分区均温2: number,
-  室外温度: number,
-  室外湿度: number,
+  室外温度: number;
+  室内湿度: number;
+  室外湿度: number;
+  目标温度: number;
+  静压: number;
+  小窗1开度: number,
+  进风口1开度: number,
+  通风开时长: number,
+  通风关时长: number,
+  耗水量: number,
 }
 
 const info = ref('')
@@ -129,41 +132,19 @@ const drawData = (data: Point[]) => {
     legend: {
       left: 'left'
     },
+    // 室外湿度: number;
+    // 目标温度: number;
+    // 静压: number;
+    // 小窗1开度: number,
+    // 进风口1开度: number,
+    // 通风开时长: number,
+    // 通风关时长: number,
+    // 耗水量: number,
     series: [
-      {
-        name: "温度1",
-        type: 'line',
-        data: data.map(d => d.温度1)
-      },
-      {
-        name: "温度2",
-        type: 'line',
-        data: data.map(d => d.温度2)
-      },
-      {
-        name: "温度3",
-        type: 'line',
-        data: data.map(d => d.温度3)
-      },
-      {
-        name: "温度4",
-        type: 'line',
-        data: data.map(d => d.温度4)
-      },
       {
         name: "室内平均温度",
         type: 'line',
         data: data.map(d => d.室内平均温度)
-      },
-      {
-        name: "分区均温1",
-        type: 'line',
-        data: data.map(d => d.分区均温1)
-      },
-      {
-        name: "分区均温2",
-        type: 'line',
-        data: data.map(d => d.分区均温2)
       },
       {
         name: "室外温度",
@@ -171,9 +152,49 @@ const drawData = (data: Point[]) => {
         data: data.map(d => d.室外温度)
       },
       {
+        name: "室内湿度",
+        type: 'line',
+        data: data.map(d => d.室内湿度)
+      },
+      {
         name: "室外湿度",
         type: 'line',
-        data: data.map(d => d.室外温度)
+        data: data.map(d => d.室外湿度)
+      },
+      {
+        name: "目标温度",
+        type: 'line',
+        data: data.map(d => d.目标温度)
+      },
+      {
+        name: "静压",
+        type: 'line',
+        data: data.map(d => d.静压)
+      },
+      {
+        name: "小窗1开度",
+        type: 'line',
+        data: data.map(d => d.小窗1开度)
+      },
+      {
+        name: "进风口1开度",
+        type: 'line',
+        data: data.map(d => d.进风口1开度)
+      },
+      {
+        name: "通风开时长",
+        type: 'line',
+        data: data.map(d => d.通风开时长)
+      },
+      {
+        name: "通风关时长",
+        type: 'line',
+        data: data.map(d => d.通风关时长)
+      },
+      {
+        name: "耗水量",
+        type: 'line',
+        data: data.map(d => d.耗水量)
       },
     ]
   };
