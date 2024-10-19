@@ -33,7 +33,7 @@ import { read, utils } from 'xlsx';
 import { ref, onMounted } from 'vue';
 import * as echarts from 'echarts';
 // type EChartsOption = echarts.EChartsOption;
-// 天数 室内平均温度 室外温度 室内湿度 室外湿度 目标温度 静压 小窗1开度 进风口1开度 通风开时长 通风关时长 耗水量
+// 天数 室内平均温度 室外温度 室内湿度 室外湿度 目标温度 静压 小窗1开度 进风口3开度 通风开时长 通风关时长 耗水量
 type Point = {
   记录时间: string,
   天数: number,
@@ -44,7 +44,7 @@ type Point = {
   目标温度: number;
   静压: number;
   小窗1开度: number,
-  进风口1开度: number,
+  进风口3开度: number,
   通风开时长: number,
   通风关时长: number,
   耗水量: number,
@@ -140,7 +140,7 @@ const drawData = (data: Point[]) => {
     // 目标温度: number;
     // 静压: number;
     // 小窗1开度: number,
-    // 进风口1开度: number,
+    // 进风口3开度: number,
     // 通风开时长: number,
     // 通风关时长: number,
     // 耗水量: number,
@@ -194,9 +194,9 @@ const drawData = (data: Point[]) => {
         yAxisIndex: 0 // 使用第一个Y轴
       },
       {
-        name: "进风口1开度",
+        name: "进风口3开度",
         type: 'line',
-        data: data.map(d => d.进风口1开度),
+        data: data.map(d => d.进风口3开度),
         yAxisIndex: 0 // 使用第一个Y轴
       },
       {
